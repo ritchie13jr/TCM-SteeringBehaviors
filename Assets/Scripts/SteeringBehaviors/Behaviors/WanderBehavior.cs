@@ -18,9 +18,9 @@ public class WanderBehavior : Steering
         return Random.value - Random.value;
     }
     
-    private Vector3 OrientationToVector(float orientation)
+    private Vector2 OrientationToVector(float orientation)
     {
-        return new Vector3(Mathf.Cos(orientation), 0, Mathf.Sin(orientation));
+        return new Vector2(Mathf.Cos(orientation), Mathf.Sin(orientation));
     }
 
     public override SteeringData GetSteering(SteeringBehaviorController steeringController)
@@ -30,12 +30,12 @@ public class WanderBehavior : Steering
         float characterOrientation = transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
         float targetOrientation = wanderOrientation + characterOrientation;
         
-        Vector3 targetPosition = transform.position + (wanderOffset * OrientationToVector(characterOrientation));
+        Vector2 targetPosition = (Vector2)transform.position + (wanderOffset * OrientationToVector(characterOrientation));
         targetPosition += wanderRadius * OrientationToVector(targetOrientation);
 
         return new SteeringData()
         {
-            linear = (targetPosition - transform.position).normalized * steeringController.maxAcceleration,
+            linear = (targetPosition - (Vector2)transform.position).normalized * steeringController.maxAcceleration,
             angular = 0f
         };
     }
