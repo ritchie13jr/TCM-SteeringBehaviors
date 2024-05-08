@@ -27,7 +27,7 @@ public class WanderBehavior : Steering
     {
         wanderOrientation += RandomBinomial() * wanderRate;
 
-        float characterOrientation = transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
+        float characterOrientation = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
         float targetOrientation = wanderOrientation + characterOrientation;
         
         Vector2 targetPosition = (Vector2)transform.position + (wanderOffset * OrientationToVector(characterOrientation));
