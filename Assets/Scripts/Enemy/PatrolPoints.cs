@@ -5,16 +5,13 @@ using UnityEngine.AI;
 
 public class PatrolPoints : MonoBehaviour
 {
-    [SerializeField] private Transform[] _patrolPoints;
+    [SerializeField]
+    private Transform[] _patrolPoints;
 
     public Transform CurrentPoint => _patrolPoints[_currentPoint];
 
     private int _currentPoint = 0;
 
-    /// <summary>
-    /// Gets the next point to patrol to
-    /// </summary>
-    /// <returns></returns>
     public Transform GetNext()
     {
         var point = _patrolPoints[_currentPoint];
@@ -22,22 +19,9 @@ public class PatrolPoints : MonoBehaviour
         return point;
     }
 
-    /// <summary>
-    /// Checks if destination reached
-    /// </summary>
-    /// <param name="agent"></param>
-    /// <returns></returns>
     public bool HasReached(PatrollingAgent agent)
     {
-        if (agent.remainingDistance <= agent.stoppingDistance)
-        {
-            if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return agent.HasReachedDestination;
     }
 }
 

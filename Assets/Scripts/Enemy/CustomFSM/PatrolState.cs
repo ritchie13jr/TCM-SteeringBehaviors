@@ -17,7 +17,7 @@ public class PatrolState : BaseState
         var patrolAgent = stateMachine.GetComponent<PatrollingAgent>();
         var patrolPoints = stateMachine.GetComponent<PatrolPoints>();
  
-        patrolAgent.SetDestination(patrolPoints.GetNext().position);
+        patrolAgent.Destination = patrolPoints.GetNext();
     }
 
     public override void Update()
@@ -28,7 +28,7 @@ public class PatrolState : BaseState
         var patrolPoints = stateMachine.GetComponent<PatrolPoints>();
         
         if (patrolPoints.HasReached(patrolAgent))
-            patrolAgent.SetDestination(patrolPoints.GetNext().position);
+            patrolAgent.Destination = patrolPoints.GetNext();
         
         var sightSensor = stateMachine.GetComponent<EnemySightSensor>();
         if (sightSensor.Ping())

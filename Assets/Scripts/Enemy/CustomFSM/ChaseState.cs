@@ -15,7 +15,7 @@ public class ChaseState : BaseState
         var patrollingAgent = stateMachine.GetComponent<PatrollingAgent>();
         var enemySightSensor = stateMachine.GetComponent<EnemySightSensor>();
 
-        patrollingAgent.SetDestination(enemySightSensor.Player.position);
+        patrollingAgent.Destination = enemySightSensor.Player;
 
         var sightSensor = stateMachine.GetComponent<EnemySightSensor>();
         if (sightSensor.Pong())
